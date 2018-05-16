@@ -4,6 +4,68 @@ import "./App.css";
 import Book from "./Book";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { title: "", author: "", url: "" };
+  }
+
+  getRandomBook() {
+    const axios = require("axios");
+    //const API_KEY = process.env.API_KEY;
+    const API_KEY = "b616c56cf63048b49b44bcfa8cd0d7bd";
+    const randomDate = (start, end) => {
+      let d = new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        ),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+
+      return [year, month, day].join("-");
+    };
+    let fictionList = true;
+
+    let list = "fiction";
+    if (fictionList) {
+      list = "nonfiction";
+    }
+    const rDate = randomDate(new Date(2009, 7, 1), new Date());
+
+    axios
+      .get("https://api.nytimes.com/svc/books/v3/lists.json", {
+        params: {
+          "api-key": API_KEY,
+          list: "combined-print-and-e-book-" + list,
+          "published-date": rDate
+        }
+      })
+      .then(response => {
+        const body = response.data;
+        const randomBook = Math.floor(Math.random() * body.results.length);
+
+        const title = body.results[
+          randomBook
+        ].book_details[0].title.toLowerCase();
+        const author = body.results[
+          randomBook
+        ].book_details[0].author.toLowerCase();
+        const url = body.results[randomBook].amazon_product_url;
+        fictionList = !fictionList;
+        this.setState({ title, author, url });
+      })
+
+      .catch(err => {
+        console.log("Error:", err);
+      });
+  }
+
+  componentDidMount() {
+    this.getRandomBook();
+  }
+
   render() {
     return (
       <div className="App">
@@ -12,7 +74,11 @@ class App extends Component {
           <header>
             <h1>What Should I read next?</h1>
           </header>
-          <Book />
+          <Book
+            title={this.state.title}
+            author={this.state.author}
+            url={this.state.url}
+          />
         </main>
         <footer>
           <img src="/images/nyt.png" alt="Data provided by New York Times" />
