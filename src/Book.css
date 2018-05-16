@@ -1,0 +1,30 @@
+a {
+  text-decoration: none;
+}
+
+.Book {
+  /* background-color: steelblue; */
+  margin: 0 auto;
+  padding: 0;
+  width: 50%;
+  /* color: white; */
+  border-radius: 20px;
+  text-transform: capitalize;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 4em;
+}
+
+#try {
+  margin: 20px auto;
+  font-size: 0.7em;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  border: 1px blue solid;
+  border-radius: 15px;
+  width: 50%;
+  cursor: pointer;
+}
+
+input {
+  display: none;
+}

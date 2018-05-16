@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+
+import "./App.css";
+import Book from "./Book";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {" "}
+        <main>
+          <header>
+            <h1>What Should I read next?</h1>
+          </header>
+          <Book />
+        </main>
+        <footer>
+          <img src="/images/nyt.png" alt="Data provided by New York Times" />
+        </footer>
       </div>
     );
   }
