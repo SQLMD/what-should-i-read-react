@@ -12,8 +12,7 @@ class App extends Component {
 
   getRandomBook() {
     const axios = require("axios");
-    //const API_KEY = process.env.API_KEY;
-    const API_KEY = "b616c56cf63048b49b44bcfa8cd0d7bd";
+    const API_KEY = process.env.REACT_APP_API_KEY;
     const randomDate = (start, end) => {
       let d = new Date(
           start.getTime() + Math.random() * (end.getTime() - start.getTime())
