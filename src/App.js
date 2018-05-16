@@ -7,6 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { title: "", author: "", url: "" };
+    this.getRandomBook = this.getRandomBook.bind(this);
   }
 
   getRandomBook() {
@@ -54,7 +55,7 @@ class App extends Component {
         ].book_details[0].author.toLowerCase();
         const url = body.results[randomBook].amazon_product_url;
         fictionList = !fictionList;
-        this.setState({ title, author, url });
+        if (title !== undefined) this.setState({ title, author, url });
       })
 
       .catch(err => {
@@ -63,6 +64,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(process.env);
     this.getRandomBook();
   }
 
@@ -78,6 +80,7 @@ class App extends Component {
             title={this.state.title}
             author={this.state.author}
             url={this.state.url}
+            getRandomBook={this.getRandomBook}
           />
         </main>
         <footer>
