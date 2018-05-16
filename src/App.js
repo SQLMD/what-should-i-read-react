@@ -46,16 +46,17 @@ class App extends Component {
       .then(response => {
         const body = response.data;
         const randomBook = Math.floor(Math.random() * body.results.length);
-
-        const title = body.results[
-          randomBook
-        ].book_details[0].title.toLowerCase();
-        const author = body.results[
-          randomBook
-        ].book_details[0].author.toLowerCase();
-        const url = body.results[randomBook].amazon_product_url;
-        fictionList = !fictionList;
-        if (title !== undefined) this.setState({ title, author, url });
+        if (body.results[randomBook] !== undefined) {
+          const title = body.results[
+            randomBook
+          ].book_details[0].title.toLowerCase();
+          const author = body.results[
+            randomBook
+          ].book_details[0].author.toLowerCase();
+          const url = body.results[randomBook].amazon_product_url;
+          fictionList = !fictionList;
+          this.setState({ title, author, url });
+        } else this.getRandomBook();
       })
 
       .catch(err => {
@@ -64,7 +65,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(process.env);
     this.getRandomBook();
   }
 
