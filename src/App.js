@@ -73,7 +73,7 @@ class App extends Component {
         {" "}
         <main>
           <header>
-            <h1>What Should I read next?</h1>
+            <h1>What the Heck Should I read?</h1>
           </header>
           <Book
             title={this.state.title}
