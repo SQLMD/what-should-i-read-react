@@ -2,17 +2,17 @@ import React, { Component } from "react";
 
 import "./App.css";
 import Book from "./Book";
+const axios = require("axios");
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { title: "", author: "", url: "" };
+    this.state = { title: "", author: "", url: "", isbn: "" };
     this.getRandomBook = this.getRandomBook.bind(this);
   }
 
   getRandomBook() {
-    const axios = require("axios");
-    const API_KEY = process.env.REACT_APP_API_KEY;
+    const API_KEY = process.env.REACT_APP_NYT_API_KEY;
     const randomDate = (start, end) => {
       let d = new Date(
           start.getTime() + Math.random() * (end.getTime() - start.getTime())
@@ -52,9 +52,11 @@ class App extends Component {
           const author = body.results[
             randomBook
           ].book_details[0].author.toLowerCase();
+          const isbn = body.results[randomBook].isbns[0].isbn10;
+          console.log(isbn, body.results[randomBook].isbns);
           const url = body.results[randomBook].amazon_product_url;
           fictionList = !fictionList;
-          this.setState({ title, author, url });
+          this.setState({ title, author, url, isbn });
         } else this.getRandomBook();
       })
 
@@ -63,8 +65,10 @@ class App extends Component {
       });
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getRandomBook();
+    const hello = await axios.get("api/hello");
+    console.log(hello);
   }
 
   render() {
@@ -79,6 +83,7 @@ class App extends Component {
             title={this.state.title}
             author={this.state.author}
             url={this.state.url}
+            isbn={this.state.isbn}
             getRandomBook={this.getRandomBook}
           />
         </main>

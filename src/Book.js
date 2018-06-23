@@ -11,10 +11,14 @@ function Book(props) {
         </a>
       </div>
       <div>by</div>
-      <div>{props.author}</div>
+      <div>{props.isbn}</div>
       <button id="try" onClick={props.getRandomBook}>
         Already read that one? Try Again.
       </button>
+      <img
+        alt={`"${props.title} by ${props.author} ${props.isbn} "`}
+        src={`http://covers.openlibrary.org/b/isbn/${props.isbn}-L.jpg`}
+      />
     </div>
   );
 }

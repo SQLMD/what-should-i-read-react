@@ -9,10 +9,14 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "serve": "node -r dotenv/config server/index.js",
+    "start": "yarn build && yarn serve",
+    "devc": "react-scripts start",
+    "devs": "nodemon -r dotenv/config server/index.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "docker": "docker-compose stop && docker-compose rm -f && docker-compose up --build -d"
-  }
+  },
+  "proxy": "http://localhost:3001/"
 }
