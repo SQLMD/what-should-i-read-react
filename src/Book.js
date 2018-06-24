@@ -8,18 +8,27 @@ function Book(props) {
       <div id="book-container">
         <div id="title-container">
           <div>
-            <a href={props.book.url} target="_blank" rel="noopener noreferrer">
+            <a
+              href={props.book.amazon_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {props.book.title}
             </a>
           </div>
           <div> by </div>
           <div>{props.book.author}</div>
         </div>
-        <img
-          alt={`Book cover for ${props.book.title} by ${props.book.author}`}
-          src={props.book.cover_url}
-        />
+        {props.book.cover_url !== "" ? (
+          <img
+            alt={`Book cover for ${props.book.title} by ${props.book.author}`}
+            src={props.book.cover_url}
+          />
+        ) : (
+          ""
+        )}
       </div>
+      <div id="description">{props.book.description}</div>
       <button id="try" onClick={() => props.getRandomBook()}>
         Already read that one? Try Again.
       </button>

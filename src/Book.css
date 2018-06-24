@@ -6,22 +6,23 @@ a {
   /* background-color: steelblue; */
   margin: 0 auto;
   padding: 0;
-  width: 50%;
+  width: 70%;
   /* color: white; */
   border-radius: 20px;
   text-transform: capitalize;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  font-size: 2.5em;
+  font-size: 3em;
 }
 #book-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 #title-container {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+  padding-right: 2em;
 }
 
 #try {
@@ -34,6 +35,12 @@ a {
   cursor: pointer;
   color: white;
   background-color: steelblue;
+}
+
+#description {
+  font-size: 0.4em;
+  text-align: left;
+  margin-top: 1em;
 }
 
 input {

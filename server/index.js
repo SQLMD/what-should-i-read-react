@@ -24,7 +24,7 @@ const getRandomBook = async (randomDate, list) => {
       {
         params: {
           "api-key": NYT_API_KEY,
-          list: `combined-print-and-e-book-${list}`,
+          list: `hardcover-${list}`,
           "published-date": randomDate
         }
       }
@@ -49,17 +49,17 @@ const getBookCover = async isbn => {
 };
 
 app.get("/api/book", async (req, res) => {
-  // let fictionList = true;
+  const list = req.query.type;
 
-  const list = "fiction";
-  // if (fictionList) {
-  //   list = "nonfiction";
-  // }
   const randomDate = getRandomDate(new Date(2009, 7, 1), new Date());
   try {
     let response = await getRandomBook(randomDate, list);
-    while (response.data.results.length === 0) {
+    let i = 0;
+    while (response.data.results.length === 0 && i < 20) {
+      i++;
+      console.log(i);
       response = await getRandomBook(randomDate, list);
+      console.log(response.data.results);
     }
     const body = response.data;
     let randomBook = Math.floor(Math.random() * body.results.length);
@@ -71,7 +71,7 @@ app.get("/api/book", async (req, res) => {
     const author = body.results[
       randomBook
     ].book_details[0].author.toLowerCase();
-    const isbn = body.results[randomBook].isbns[0].isbn10;
+    const isbns = body.results[randomBook].isbns;
     const amazon_url = body.results[randomBook].amazon_product_url;
     const book = {
       title,
@@ -81,11 +81,24 @@ app.get("/api/book", async (req, res) => {
       description: ""
     };
     try {
-      const googleBook = await getBookCover(isbn);
-      if (googleBook.data.items !== undefined) {
+      let googleBook;
+      for (i = 0; i < isbns.length; i++) {
+        googleBook = await getBookCover(isbns[i].isbn13);
+        if (googleBook.data.items === undefined) {
+          googleBook = await getBookCover(isbns[i].isbn10);
+        }
+        if (googleBook.data.items !== undefined) {
+          break;
+        }
+      }
+
+      if (googleBook !== undefined && googleBook.data.items.length > 0) {
         const cover_url =
           googleBook.data.items[0].volumeInfo.imageLinks.thumbnail;
-        const description = googleBook.data.items[0].volumeInfo.description;
+        let description = googleBook.data.items[0].volumeInfo.description;
+        if (description.length > 500) {
+          description = description.slice(0, 500) + "...";
+        }
         book.cover_url = cover_url;
         book.description = description;
       }
