@@ -12,17 +12,28 @@ a {
   text-transform: capitalize;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  font-size: 4em;
+  font-size: 2.5em;
+}
+#book-container {
+  display: flex;
+  justify-content: space-around;
+}
+#title-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
 }
 
 #try {
   margin: 20px auto;
   font-size: 0.7em;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  border: 1px blue solid;
+
   border-radius: 15px;
   width: 50%;
   cursor: pointer;
+  color: white;
+  background-color: steelblue;
 }
 
 input {

@@ -5,20 +5,24 @@ import "./Book.css";
 function Book(props) {
   return (
     <div className="Book">
-      <div>
-        <a href={props.url} target="_blank">
-          {props.title}
-        </a>
+      <div id="book-container">
+        <div id="title-container">
+          <div>
+            <a href={props.book.url} target="_blank" rel="noopener noreferrer">
+              {props.book.title}
+            </a>
+          </div>
+          <div> by </div>
+          <div>{props.book.author}</div>
+        </div>
+        <img
+          alt={`Book cover for ${props.book.title} by ${props.book.author}`}
+          src={props.book.cover_url}
+        />
       </div>
-      <div>by</div>
-      <div>{props.isbn}</div>
-      <button id="try" onClick={props.getRandomBook}>
+      <button id="try" onClick={() => props.getRandomBook()}>
         Already read that one? Try Again.
       </button>
-      <img
-        alt={`"${props.title} by ${props.author} ${props.isbn} "`}
-        src={`http://covers.openlibrary.org/b/isbn/${props.isbn}-L.jpg`}
-      />
     </div>
   );
 }

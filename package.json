@@ -4,11 +4,14 @@
   "private": true,
   "dependencies": {
     "axios": "0.18.0",
+    "prettier": "^1.13.5",
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "react-scripts": "1.1.4"
   },
   "scripts": {
+    "lint": "./node_modules/.bin/eslint src",
+    "lint-fixup": "./node_modules/.bin/eslint src --ext .js,.jsx --fix",
     "build": "react-scripts build",
     "serve": "node -r dotenv/config server/index.js",
     "start": "yarn build && yarn serve",
@@ -18,5 +21,16 @@
     "eject": "react-scripts eject",
     "docker": "docker-compose stop && docker-compose rm -f && docker-compose up --build -d"
   },
-  "proxy": "http://localhost:3001/"
+  "proxy": "http://localhost:3001/",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.4",
+    "eslint": "^5.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-problems": "^0.1.2",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.1",
+    "eslint-plugin-react": "^7.9.1"
+  }
 }
