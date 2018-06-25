@@ -30,7 +30,7 @@ function Book(props) {
       </div>
       <div id="description">{props.book.description}</div>
       <button id="try" onClick={() => props.getRandomBook()}>
-        Already read that one? Try Again.
+        Already read that one?<br /> Try Again.
       </button>
     </div>
   );
