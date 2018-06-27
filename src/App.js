@@ -42,7 +42,7 @@ class App extends React.Component {
         {" "}
         <main>
           <header>
-            <h1>What the Heck Should I read?</h1>
+            <h1>What the Heck Should I Read Now?</h1>
           </header>
           {this.state.isLoaded ? (
             <Book

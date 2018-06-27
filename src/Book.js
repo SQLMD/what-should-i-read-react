@@ -29,8 +29,9 @@ function Book(props) {
         )}
       </div>
       <div id="description">{props.book.description}</div>
+      <div> Already read that one? </div>
       <button id="try" onClick={() => props.getRandomBook()}>
-        Already read that one?<br /> Try Again.
+        Try Again.
       </button>
     </div>
   );
